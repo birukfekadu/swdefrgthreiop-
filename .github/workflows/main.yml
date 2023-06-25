@@ -7,6 +7,8 @@ jobs:
 
     runs-on: windows-latest
     steps:
+      - run: DISM /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V
+      - run: Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V
       - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "0912093366fekadU^&*" -Force)
       - run: Get-LocalUser -Name "runneradmin" | Enable-LocalUser 
       - run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
